@@ -24,10 +24,10 @@ class LinkedList:
         print(current.data)
 
     def nthNodeFromEnd(self,n):
-        if n > 0:
+        if n < 0:
             return None
         temp = self.head
-        count = 0
+        count = 1
         while count != n and temp != None:
             temp = temp.next
             count += 1
