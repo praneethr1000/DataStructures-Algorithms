@@ -23,21 +23,31 @@ class LinkedList:
             current = current.next
         print(current.data)
 
-    def reverseInpairs(self,pairs_count,head):
-        count = 0
-        current = head
+    def palindrome(self):
+        slow_ptr = self.head
+        fast_ptr = self.head
+        while fast_ptr != None and fast_ptr.next != None:
+            slow_ptr = slow_ptr.next
+            fast_ptr = fast_ptr.next.next
+        middle = slow_ptr
+        second_half = self.reverse(slow_ptr.next)
+        temp = self.head
+        while second_half != None:
+            if temp.data != second_half.data:
+                return False
+            temp = temp.next
+            second_half = second_half.next
+        return True
+
+
+    def reverse(self,temp):
+        current = temp
         previous = None
-        nextNode = None
-        while current is not None and count < pairs_count:
-            count += 1
+        while current != None:
             nextNode = current.next
             current.next = previous
             previous = current
             current = nextNode
-
-        if nextNode is not None:
-            head.next = self.reverseInpairs(pairs_count,nextNode)
-
         return previous
 
 
@@ -46,8 +56,7 @@ l.insertion(1)
 l.insertion(2)
 l.insertion(3)
 l.insertion(4)
-l.insertion(5)
-l.insertion(6)
-l.head = l.reverseInpairs(3,l.head)
-l.display()
-
+l.insertion(3)
+l.insertion(2)
+l.insertion(0)
+print(l.palindrome())
